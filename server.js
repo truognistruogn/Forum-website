@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('./dbconfig.js');
+//const config = require('./dbconfig.js');
+const path = require('path');
 
 const app = express();
 const PORT = 5000;
@@ -13,6 +14,18 @@ const JWT_SECRET = 'your_jwt_secret_key_change_this_in_production';
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public')); // Chứa file HTML, CSS, JS
+
+const config = {
+  server: process.env.DB_SERVER || 'localhost',
+  database: process.env.DB_NAME || 'ForumDB',
+  user: process.env.DB_USER || 'sa',
+  password: process.env.DB_PASSWORD || '',
+  options: {
+    encrypt: process.env.NODE_ENV === 'production',
+    trustServerCertificate: true,
+    enableArithAbort: true
+  }
+};
 
 let pool;
 
