@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('./dbconfig');
+const config = require('./dbconfig.js');
 
 const app = express();
 const PORT = 5000;
