@@ -10,10 +10,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_change_in_production';
 
-// 🔥 TỰ ĐỘNG TẠO TABLES KHI SERVER START
+// TỰ ĐỘNG TẠO TABLES KHI SERVER START
 async function initializeDatabase() {
   try {
-    console.log('🔄 Đang khởi tạo database...');
+    console.log('Đang khởi tạo database...');
     
     // Tạo bảng Users
     await db.query(`
@@ -26,7 +26,7 @@ async function initializeDatabase() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
-    console.log('✅ Bảng Users đã sẵn sàng');
+    console.log('Bảng Users đã sẵn sàng');
 
     // Tạo bảng Posts
     await db.query(`
@@ -38,7 +38,7 @@ async function initializeDatabase() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
-    console.log('✅ Bảng Posts đã sẵn sàng');
+    console.log('Bảng Posts đã sẵn sàng');
 
     // Tạo bảng Comments
     await db.query(`
@@ -50,7 +50,7 @@ async function initializeDatabase() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
-    console.log('✅ Bảng Comments đã sẵn sàng');
+    console.log('Bảng Comments đã sẵn sàng');
 
     // Tạo bảng Likes
     await db.query(`
@@ -63,7 +63,7 @@ async function initializeDatabase() {
         UNIQUE(post_id, user_id)
       )
     `);
-    console.log('✅ Bảng Likes đã sẵn sàng');
+    console.log('Bảng Likes đã sẵn sàng');
 
     // Kiểm tra và tạo admin user
     const adminCheck = await db.query('SELECT id FROM Users WHERE username = $1', ['admin']);
@@ -73,14 +73,14 @@ async function initializeDatabase() {
         'INSERT INTO Users (username, email, password, role) VALUES ($1, $2, $3, $4)',
         ['admin', 'admin@example.com', hashedPassword, 'admin']
       );
-      console.log('✅ Admin user đã tạo: admin / admin123');
+      console.log('Admin user đã tạo: admin / admin123');
     } else {
-      console.log('✅ Admin user đã tồn tại');
+      console.log('Admin user đã tồn tại');
     }
     
-    console.log('🎉 Database khởi tạo thành công!');
+    console.log('Database khởi tạo thành công!');
   } catch (error) {
-    console.error('❌ Lỗi khởi tạo database:', error.message);
+    console.error('Lỗi khởi tạo database:', error.message);
   }
 }
 
@@ -398,5 +398,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
